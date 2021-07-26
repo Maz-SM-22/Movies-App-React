@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 
 const AuthenticationContext = React.createContext();
 
 export const AuthenticationProvider = ({ children }) => {
     const [authenticationData, setAuthenticationData] = useState({});
 
-    function login(username) {
+    function login(email) {
         setAuthenticationData({
-            username
+            email
         });
     }
 

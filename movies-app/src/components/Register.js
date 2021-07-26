@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 
 import { useAuthentication } from "../Authentication";
 
-function Login() {
+function Register() {
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const { login } = useAuthentication();
+
+    const handleUsernameChange = (event) => {
+        setUsername(event.target.value);
+    };
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -21,6 +26,7 @@ function Login() {
             'Content-Type': 'application/json',
         },
         body: {
+            username,
             email,
             password
         }
@@ -30,17 +36,26 @@ function Login() {
         if (isLoginDisabled) {
             return;
         }
-        let response = await fetch('http://localhost:2295/auth/login', options);
+        let response = await fetch('http://localhost:2295/auth/register', options);
         const userData = await response.json()
         await login(email);
     }
 
-    const isLoginDisabled = !email || !password;
+    const isLoginDisabled = !username || !password;
 
     return (
         <>
             <form className="login" onSubmit={handleSubmit}>
-                <h2>Login</h2>
+                <h2>Register</h2>
+                <div className="login-form">
+                    <label htmlFor="username"></label>
+                    <input
+                        type="text"
+                        id="username"
+                        onChange={handleUsernameChange}
+                        value={username}
+                    />
+                </div>
                 <div className="login-form">
                     <label htmlFor="email"></label>
                     <input
@@ -48,7 +63,6 @@ function Login() {
                         id="email"
                         onChange={handleEmailChange}
                         value={email}
-                        placeholder="email"
                         required
                     />
                 </div>
@@ -59,16 +73,15 @@ function Login() {
                         id="password"
                         onChange={handlePasswordChange}
                         value={password}
-                        placeholder="password"
                         required
                     />
                 </div>
                 <button className="login-button" disabled={isLoginDisabled} type="submit">
-                    Click to login
+                    Click to register and login
                 </button>
             </form>
         </>
     )
 }
 
-export default Login;
+export default Register;
