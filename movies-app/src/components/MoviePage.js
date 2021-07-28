@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
-function PageDisplay({ selectedMovie = {} }) {
-    const movie = useState(selectedMovie.movie);
-
+function PageDisplay(props) {
+    const movie = props.selectedMovie;
     return (
         <>
             <div className="top-container">

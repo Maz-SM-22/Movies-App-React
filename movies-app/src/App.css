@@ -59,7 +59,7 @@ li {
   margin: 25px;
 }
 
-input {
+.login-form > input {
   width: 500px; 
   padding: 20px; 
   font-size: 1.1em;

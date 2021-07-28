@@ -20,23 +20,22 @@ function Register() {
         setPassword(event.target.value);
     };
 
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: {
-            username,
-            email,
-            password
-        }
-    };
-
-    async function handleSubmit() {
+    async function handleSubmit(event) {
+        event.preventDefault();
         if (isLoginDisabled) {
             return;
         }
-        let response = await fetch('http://localhost:2295/auth/register', options);
+        let response = await fetch('http://localhost:2295/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username,
+                email,
+                password
+            })
+        });
         const userData = await response.json()
         await login(email);
     }

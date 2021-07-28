@@ -15,22 +15,21 @@ function Login() {
         setPassword(event.target.value);
     };
 
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: {
-            email,
-            password
-        }
-    };
-
-    async function handleSubmit() {
+    async function handleSubmit(event) {
+        event.preventDefault();
         if (isLoginDisabled) {
             return;
         }
-        let response = await fetch('http://localhost:2295/auth/login', options);
+        let response = await fetch('http://localhost:2295/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email,
+                password
+            })
+        });
         const userData = await response.json()
         await login(email);
     }

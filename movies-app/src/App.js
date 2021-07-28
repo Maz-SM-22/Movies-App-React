@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { AuthenticationProvider } from "./Authentication";
-import PageDisplay from "./components/MoviePage";
+// import PageDisplay from "./components/MoviePage";
 // import Login from "./components/Login";
 // import Register from "./components/Register";
-// import Header from './components/Header';
-// import Banner from './components/Banner';
-// import GridDisplay from './components/MovieGrid';
+import Header from './components/Header';
+import Banner from './components/Banner';
+import GridDisplay from './components/MovieGrid';
 
 function App() {
   const [state, setState] = useState([]);
@@ -26,10 +26,12 @@ function App() {
   return (
     <AuthenticationProvider>
       <div className="App">
-        {/* <Header movies={state} />
+        <Header movies={state} />
         <Banner />
-        <GridDisplay movies={state} /> */}
-        <PageDisplay selectedMovie={ } />
+        <GridDisplay movies={state} />
+        {/* <Login />
+        <Register /> */}
+        {/* <PageDisplay selectedMovie={test} /> */}
       </div>
     </AuthenticationProvider>
   );
